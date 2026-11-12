@@ -1,0 +1,55 @@
+# IDE and Editor
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iws
+*.iml
+*.ipr
+.project
+.settings/
+.classpath
+.factorypath
+*.c9/
+*.sw?
+*.swo
+*~
+.DS_Store
+
+# Build
+target/
+build/
+dist/
+out/
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Spring Boot / STS
+.apt_generated
+.sts4-cache
+.springBeans
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+
+# Logs and debug
+*.log
+*.log.*
+npm-debug.log*
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+
+# Misc
+.history
+.vscode-test
+Thumbs.db

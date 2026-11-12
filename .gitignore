@@ -1,0 +1,97 @@
+# IDEs and Editors
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iml
+*.iws
+*.ipr
+*.sublime-workspace
+*.sublime-project
+.project
+.settings/
+.classpath
+.factorypath
+*.c9/
+*.sw?
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Node.js / npm
+node_modules/
+npm-debug.log*
+npm-error.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+pnpm-error.log*
+lerna-debug.log*
+.npm
+package-lock.json
+
+# Build artifacts
+dist/
+build/
+out/
+*.log
+
+# Java/Maven
+target/
+.mvn/wrapper/maven-wrapper.jar
+.apt_generated
+.sts4-cache
+
+# Spring Boot
+.springBeans
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# IDE cache
+.eslintcache
+.parcel-cache
+.cache/
+
+# Output of 'npm pack'
+*.tgz
+
+# Diagnostic reports
+lhci_build_* 
+
+# SonarQube
+.scannerwork/
+sonar-project.properties
+
+# Local Maven settings
+.m2/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Misc
+.history
+.vscode-test
+
+# Docs
+docs/

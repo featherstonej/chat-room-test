@@ -1,0 +1,23 @@
+.main-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px;
+    background-color: green;
+    color: white;
+    flex-direction: row;
+    display: flex;
+}
+
+.menu-button {
+    background-color: gray;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+}
+
+.menu-button.login-button {
+    background-color: blue;
+}
