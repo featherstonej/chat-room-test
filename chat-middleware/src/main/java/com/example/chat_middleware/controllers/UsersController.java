@@ -4,10 +4,6 @@ import com.example.chat_middleware.dao.UserDao;
 import com.example.chat_middleware.dao.entities.Users;
 import com.example.chat_middleware.dto.LoginRequest;
 import com.example.chat_middleware.dto.UpdateProfileRequest;
-import com.example.chat_middleware.dto.RegistrationRequest;
-import com.example.chat_middleware.dto.RegistrationResponse;
-
-import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
