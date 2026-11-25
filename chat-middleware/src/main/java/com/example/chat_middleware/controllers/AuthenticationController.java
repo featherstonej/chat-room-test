@@ -13,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
@@ -41,6 +42,9 @@ public class AuthenticationController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired 
+    private PasswordEncoder passwordEncoder;
+
     private final AuthenticationManager authManager;
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
     
@@ -51,21 +55,32 @@ public class AuthenticationController {
 
     @PostMapping ("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegistrationRequest request) {
-        if (request.getUsername() == null || request.getUsername().trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("Username cannot be empty");
-        }
-        if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("Password cannot be empty");
-        }
-        if (userDao.existsByUserName(request.getUsername())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
-        }
+        // if (request.getUsername() == null || request.getUsername().trim().isEmpty()) {
+        //     return ResponseEntity.badRequest().body("Username cannot be empty");
+        // }
+        // if (request.getPassword() == null || request.getPassword().trim().isEmpty()) {
+        //     return ResponseEntity.badRequest().body("Password cannot be empty");
+        // }
+        // if (userDao.existsByUserName(request.getUsername())) {
+        //     return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists");
+        // }
 
-        Users user = new Users();
-        user.setUserName(request.getUsername());
-        user.setPassword(request.getPassword());
-        Users savedUser = userDao.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse(savedUser.getUserName()));
+        // Users user = new Users();
+        // user.setUserName(request.getUsername());
+        // user.setPassword(request.getPassword());
+        // Users savedUser = userDao.save(user);
+        // return ResponseEntity.status(HttpStatus.CREATED).body(new RegistrationResponse(savedUser.getUserName()));
+        String username = request.getUsername();
+        if (userDao.existsByUserName(username)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Username already exists"));
+        }
+        
+        Users u = new Users();
+        u.setUserName(username);
+        u.setPassword(passwordEncoder.encode(request.getPassword()));
+        Users saved = userDao.save(u);
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(new RegistrationResponse(saved.getUserName()));
     }
 
     @PostMapping("/login")
@@ -74,7 +89,7 @@ public class AuthenticationController {
         HttpServletResponse response) {
         try {
             Authentication auth = authManager.authenticate(
-            UsernamePasswordAuthenticationToken.unauthenticated(req.getUserName(), req.getPassword()));
+            UsernamePasswordAuthenticationToken.unauthenticated(req.getUsername(), req.getPassword()));
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(auth);
             SecurityContextHolder.setContext(context);
@@ -103,6 +118,6 @@ public class AuthenticationController {
         token.getToken(); // touching it makes Spring write the XSRF-TOKEN cookie
         return ResponseEntity.noContent().build();
     }
-    public record UserSummary(UUID id, String userName) {}
+    public record UserSummary(UUID id, String username) {}
     
 }

@@ -59,7 +59,7 @@ public class UsersController {
      */
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        Users user = userDao.findByUserNameAndPassword(loginRequest.getUserName(), loginRequest.getPassword());
+        Users user = userDao.findByUserNameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
