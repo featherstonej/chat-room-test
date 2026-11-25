@@ -47,7 +47,7 @@ public class SecurityConfig {
             .sessionFixation(f -> f.changeSessionId())
             .maximumSessions(5))
             .authorizeHttpRequests(a -> a
-            .requestMatchers("/auth/register", "/auth/login","/auth/csrf", "/api/users/check-username").permitAll()
+            .requestMatchers("/auth/register", "/auth/login","/auth/csrf", "/auth/me", "/users/check-username").permitAll()
             .anyRequest().authenticated())
             .exceptionHandling(e -> e
             .authenticationEntryPoint(new

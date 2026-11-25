@@ -1,15 +1,11 @@
-import React from 'react'
 import './header.css'
 import MainMenu from '../menu/main-menu'
 
-const Header = ({ authenticated, setAuthenticated }) => {
+const Header = ({ onLogin, onLogout }) => {
   return (
     <header className="header">
       <h1>Chat Room</h1>
-      <MainMenu 
-        authenticated={authenticated}
-        setAuthenticated={setAuthenticated}
-      />
+      <MainMenu onLogin={onLogin} onLogout={onLogout} />
     </header>
   )
 }

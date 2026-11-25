@@ -15,12 +15,12 @@ export function AuthProvider({ children }) {
     }, [])
     const login = useCallback(async (userName, password) => {
         const u = await api('/auth/login', {
-            method: 'POST', body: { userName, password }
+            method: 'POST', body: { username: userName, password: password }
         })
         setUser(u)
     }, [])
     const register = useCallback(async (userName, password) => {
-        await api('/auth/register', { method: 'POST', body: { userName, password } })
+        await api('/auth/register', { method: 'POST', body: { username: userName, password } })
         await login(userName, password)
     }, [login])
     const logout = useCallback(async () => {

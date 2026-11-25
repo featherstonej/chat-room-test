@@ -17,7 +17,7 @@ export async function api(path, { method = 'GET', body } = {}) {
     const csrf = getCookie('XSRF-TOKEN')
     if (csrf && method !== 'GET') headers['X-XSRF-TOKEN'] = decodeURIComponent(csrf)
     
-        const res = await fetch(`/api${path}`, {
+        const res = await fetch(path, {
         method,
         headers,
         credentials: 'include',

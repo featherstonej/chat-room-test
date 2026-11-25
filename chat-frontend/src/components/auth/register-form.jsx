@@ -3,7 +3,7 @@ import { useAuth } from '../../auth/AuthContext'
 import PasswordInput from './password-input'
 
 export default function RegisterForm() {
-    const { login } = useAuth()
+    const { register } = useAuth()
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPassword] = useState('')

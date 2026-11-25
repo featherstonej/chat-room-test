@@ -103,8 +103,11 @@ public class AuthenticationController {
         }
     }
     @GetMapping("/me")
-    public UserSummary me(@AuthenticationPrincipal ChatUserPrincipal p) {
-        return new UserSummary(p.getId(), p.getUsername());
+    public ResponseEntity<UserSummary> me(@AuthenticationPrincipal ChatUserPrincipal p) {
+        if (p == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(new UserSummary(p.getId(), p.getUsername()));
     }
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest request,

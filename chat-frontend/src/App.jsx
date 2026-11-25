@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Header from './components/header/header'
 import Body from './components/body/body'
+import { useAuth } from './auth/AuthContext'
 
 // function App() {
 //   const [count, setCount] = useState(0)
@@ -22,12 +23,13 @@ import Body from './components/body/body'
 // }
 
 function App() {
-  const { loading } = useAuth()
+  const { authenticated, loading } = useAuth()
+  const [showAuth, setShowAuth] = useState(false)
   if (loading) return <div className="app-loading">Loading...</div>
   return (
     <>
-      <Header />
-      <Body />
+      <Header onLogin={() => setShowAuth(true)} onLogout={() => setShowAuth(false)} />
+      <Body showAuth={showAuth && !authenticated} />
     </>
   )
 }
